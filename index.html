@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="src/style.css" rel="stylesheet">
+		<link href="src/grapheComparatif/styleGrapheComparatif.css" rel="stylesheet">
+		<link href="src/grapheDeforestation/styleGrapheDeforestation.css" rel="stylesheet">
+		<link href="src/graphePays/styleGraphePays.css" rel="stylesheet">
+		<link href="src/grapheTotal/styleGrapheTotal.css" rel="stylesheet">
+		<script src="https://d3js.org/d3.v6.min.js"></script>
+		<script src="https://d3js.org/d3-array.v2.min.js"></script>
+		<script src="https://d3js.org/d3-geo.v2.min.js"></script>
+		<script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+		<script src="https://d3js.org/topojson.v1.min.js"></script>
+		
+		<script src="https://kit.fontawesome.com/ca023ff532.js" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		
+		<!-- Optional JavaScript; choose one of the two! -->
+
+		<!-- Option 1: Bootstrap Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+		<!-- Option 2: Separate Popper and Bootstrap JS -->
+		<!--
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+		-->
+
+		<title>Data Visualisation</title>
+	</head>
+	<body>
+		<div id="carouselExample" class="carousel carousel slide" data-bs-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+				<li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+				<li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active" data-bs-interval="10000">
+					<div class="test">
+						<div class="text-center my-auto">
+							<div class="row" id="title">
+								<div class="col-sm-2"></div>
+								<div class="border border-white rounded col-md-8">
+									<div class="border border-white rounded mb-2 mt-2 ml-1 mr-1">
+									<h1 class="mb-1 mt-5"> Data Visualisation Déforestation </h1>
+									<h3 class="mb-5">
+									<em>Comment peut-on montrer les différents facteurs humains responsables de la déforestation ?</em>
+									</h3>
+									</div>
+								</div>
+								<div class="col-sm-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item" data-bs-interval="2000">
+					<div class="test">
+						<div class="text-center my-auto">
+							<div class="row" id="title">
+								<div class="col-sm-2"></div>
+								<div class="border border-white rounded col-md-8">
+									<div class="border border-white rounded mb-2 mt-2 ml-1 mr-1">
+									<h1 class="mb-1 mt-5"> Data Visualisation Déforestation </h1>
+									<h3 class="mb-5">
+									<em>Comment peut-on montrer les différents facteurs humains responsables de la déforestation ?</em>
+									</h3>
+									</div>
+								</div>
+								<div class="col-sm-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="test">
+						<div class="text-center my-auto">
+							<div class="row" id="title">
+								<div class="col-sm-2"></div>
+								<div class="border border-white rounded col-md-8">
+									<div class="border border-white rounded mb-2 mt-2 ml-1 mr-1">
+									<h1 class="mb-1 mt-5"> Data Visualisation Déforestation </h1>
+									<h3 class="mb-5">
+									<em>Comment peut-on montrer les différents facteurs humains responsables de la déforestation ?</em>
+									</h3>
+									</div>
+								</div>
+								<div class="col-sm-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</a>
+		</div>
+
+		<!--<nav class="navbar fixed-top navbar-light" style="background-color: #93cf82;"">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Déforestation</a>
+			</div>
+		</nav>-->
+		
+		<div id="black">
+			<div class="container pt">
+				<div class="row centered">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4">
+						<h1>Quelques chiffres</h1>
+						<hr>
+					</div>
+					<div class="col-lg-4"></div>
+					<div class="col-lg-6">
+						<p><i class="fas fa-tree"></i></p>
+						<h1>30 %</h1>
+						<hr>
+						<h4>de la surface de la terre est composée de forêts</h4>
+					</div>
+			
+					<div class="col-lg-6">
+						<p><i class="fas fa-globe-europe"></i></p>
+						<h1>4.1 millions</h1>
+						<hr>
+						<h4>d'hectares de forêt sur Terre</h4>
+					</div>
+
+					<p id="joli"></p>
+
+			
+					<div id="testCouleur" class="col-lg-4">
+						<p><i class="fas fa-tree"></i></p>
+						<h1>11.9 millions</h1>
+						<hr>
+						<h4>d'hectares de forêt perdus dans les tropiques en 2019</h4>
+					</div>
+			
+					<div id="testCouleur" class="col-lg-4">
+						<p><i class="fas fa-leaf"></i></p>
+						<h1>3.8 millions</h1>
+						<hr>
+						<h4>des 11.9 millions sont des forêts primaires tropicales</h4>
+					</div>
+
+					<div id="testCouleur" class="col-lg-4">
+						<p><i class="fas fa-futbol"></i></i></p>
+						<h1>6 secondes</h1>
+						<hr>
+						<h4>C'est le temps qu'il faut pour détruire un terrain de foot de forêt et cela pendant toute l'année</h4>
+					</div>
+		
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /black -->
+
+		<div id="white">
+			<div class="container">
+				<div class="row mb-3">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4 centered">
+						<h1>Notre projet</h1>
+						<hr>
+					</div>
+					<div class="col-lg-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8 col-lg-offset-2">
+						<p>
+							Ce site est une datavisualisation ayant pour objectif de répondre à notre problématique principale qui est : 
+							<br>
+							<em>Comment peut-on montrer les différents facteurs humains responsables de la déforestation ?</em>
+							<br>
+							Le but est de montrer les différents facteurs humains qui causent des déforestations et ensuite de voir l'impact actuel de ceux-ci sur notre planète. L'intérêt est de pouvoir visualiser l'ampleur de leurs dégâts depuis ces dernières années pour mesurer l'impact de l'être humain sur nos forêts.
+						</p>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+			<div class="row mt-2">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<strong> Information : </strong>
+						Si vous fermez par mégarde une des informations en cliquant sur <i class="fas fa-times"></i>, et que vous voulez la relire, rafraichissez la page en cliquant sur <i class="fas fa-redo-alt"></i> ou appuyez sur <strong>F5</strong> ou <strong>CTRL-R</strong>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+		</div>
+		<!-- /white -->
+
+		<nav>
+			<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+			  <a class="nav-link active" id="nav-first-tab" data-bs-toggle="tab" href="#nav-first" role="tab" aria-controls="nav-first" aria-selected="false">Evolution des différentes causes humaines</a>
+			  <a class="nav-link" id="nav-second-tab" data-bs-toggle="tab" href="#nav-second" role="tab" aria-controls="nav-second" aria-selected="true">Répartition détaillée par année des différentes causes humaines</a>
+			</div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade show active" id="nav-first" role="tabpanel" aria-labelledby="nav-first-tab">
+				<div class="container" id="defo">
+					<div class="row mb-3">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8 centered">
+							<h1>Perte de surface de forêt en hectare selon le type de déforestation</h1>
+							<hr>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
+							<div class="alert alert-primary alert-dismissible" role="alert">
+								<strong> Information : </strong>
+								Si vous voulez vous renseigner plus en détail sur une année en particulier, cliquez sur l'onglet droit <u>Répartition détaillée par année des différentes causes humaines</u> juste au dessus du titre.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+					<div id="grapheDeforestationBis"></div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="nav-second" role="tabpanel" aria-labelledby="nav-second-tab">
+				<div class="container" id="defo">
+					<div class="row mb-3">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8 centered">
+							<h1>Perte de surface de forêt en hectare selon le type de déforestation</h1>
+							<hr>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+					<div class="container centered">
+						<button type="button" class="btn btn-outline-success" onclick="update('2001')">2001</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2002')">2002</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2003')">2003</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2004')">2004</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2005')">2005</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2006')">2006</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2007')">2007</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2008')">2008</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2009')">2009</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2010')">2010</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2011')">2011</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2012')">2012</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2013')">2013</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2014')">2014</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2015')">2015</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2016')">2016</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2017')">2017</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2018')">2018</button>
+						<button type="button" class="btn btn-outline-success" onclick="update('2019')">2019</button>
+					</div>
+					<div class="row mt-2 mb-3">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
+							<div class="alert alert-primary alert-dismissible" role="alert">
+								<strong>Information : </strong> Cliquez sur le bouton de l'année souhaitée pour avoir les informations pour cette année là. Par défaut, vous voyez l'année 2019. Si vous souhaitez retourner sur l'autre graphique, cliquez sur l'onglet gauche <u>Evolution des différentes causes humaines</u> juste au dessus du titre.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+					<div id="grapheDeforestation"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="src/grapheDeforestation/grapheDeforestation.js"></script>
+		<script type="text/javascript" src="src/grapheDeforestation/grapheDeforestationBis.js"></script>
+		
+	
+		<div class="container" id="compa">
+			<div class="row mb-3">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-7 centered">
+					<h1>Evolution de la déforestation dans le monde</h1>
+					<hr>
+				</div>
+				<div class="col-lg-2 centered mt-3"><h3>en hectares</h3></div>
+				<div class="col-lg-2 centered mt-3">
+					<button type="button" class="btn btn-outline-success" id="replay">Replay</button>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="alert alert-primary alert-dismissible" role="alert">
+						<strong>Information : </strong> Vous pouvez redémarrer l'animation en cliquant sur le bouton <u>Replay</u> à droite de votre écran.
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div id="grapheComparatif">
+			</div>
+		</div>
+		<script type="text/javascript" src="src/grapheComparatif/grapheComparatif.js"></script>
+
+		<div class="container" id="total">
+			<div class="row mb-3">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8 centered">
+					<h1>Comparaison entre différents pays en fonction des causes de déforestation</h1>
+					<hr>
+				</div>
+				<div class="row mb-3">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<div class="alert alert-primary alert-dismissible" role="alert">
+							<strong>Information : </strong> Passez votre souris sur une colonne pour voir le pays auquel elle correspond ainsi que la valeur totale des pertes de surface de forêt en hectares.
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2001 </h3>
+					<div id="grapheTotal2001"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2005 </h3>
+					<div id="grapheTotal2005"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2008 </h3>
+					<div id="grapheTotal2008"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2011 </h3>
+					<div id="grapheTotal2011"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2014 </h3>
+					<div id="grapheTotal2014"></div>
+				</div>
+				<div class="col-lg-4 mb-2 centered">
+					<h3> 2019 </h3>
+					<div id="grapheTotal2019"></div>
+				</div>
+			</div>
+			<!--<div id="grapheTotal"></div>-->
+		</div>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2001.js"></script>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2005.js"></script>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2008.js"></script>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2011.js"></script>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2014.js"></script>
+		<script type="text/javascript" src="src/grapheTotal/grapheTotal2019.js"></script>
+
+		<div class="container" id="pays">
+			<div class="row mb-3">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8 centered">
+					<h1>Visualisation des causes de déforestation par pays</h1>
+					<hr>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div class="container centered">
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Argentine')">Argentine</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Australie')">Australie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Bolivie')">Bolivie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Bresil')">Bresil</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Canada')">Canada</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Chine')">Chine</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Colombie')">Colombie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('etats-Unis')">Etats-Unis</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Indonesie')">Indonesie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Madagascar')">Madagascar</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Malaisie')">Malaisie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Mexique')">Mexique</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Myanmar')">Myanmar</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Nigeria')">Nigeria</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Paraguay')">Paraguay</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Perou')">Perou</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Republique democratique du Congo')">Republique democratique du Congo</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Russie')">Russie</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Suede')">Suede</button>
+				<button type="button" class="btn btn-outline-success" onclick="updateP('Tanzanie')">Tanzanie</button>
+			</div>
+			<div class="row mt-2 mb-3">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="alert alert-primary alert-dismissible" role="alert">
+						<strong>Information : </strong> Vous pouvez choisir le pays qui vous intéresse en cliquant sur le bouton correspondant à ce pays. Plusieurs courbes s'affichent, vous pouvez cacher les courbes non voulues en cliquant sur le nom de la courbe correspondante sur la légende à droite du graphique. Si vous voulez refaire apparaitre une courbe cachée, il suffit de recliquer sur son nom dans la légende. Vous pouvez aussi passer votre souris sur les différents points de la courbe pour voir plus en détail les informations de ce point. <br><strong>Attention :</strong> L'échelle de l'axe n'est pas toujours la même faites attention lors de votre lecture. En effet, l'échelle s'adapte au pays affiché.
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div id="graphePays"></div>
+		</div>
+		<script type="text/javascript" src="src/graphePays/graphePays.js"></script>
+	</body>
+	<footer class="nb-footer">
+		<br>
+		<div class="text-center">
+			<a class="up-arrow" href="#" data-toggle="tooltip" title="Haut de page">
+				<span class="glyphicon glyphicon-chevron-up"></span>
+			</a>
+		</div>
+		<div class="container text-center">
+			<div class="row">	
+				<div class="col-md-3 col-sm-6">
+					<div class="footer-info-single">
+						<h2 class="title"> Gestion des Données </h2>
+						<ul class="list-unstyled">
+							<li><a href="https://www.globalforestwatch.org/dashboards/global/?category=summary&dashboardPrompts=eyJzaG93UHJvbXB0cyI6dHJ1ZSwicHJvbXB0c1ZpZXdlZCI6WyJkYXNoYm9hcmRBbmFseXNlcyJdLCJzZXR0aW5ncyI6eyJzaG93UHJvbXB0cyI6dHJ1ZSwicHJvbXB0c1ZpZXdlZCI6WyJkYXNoYm9hcmRBbmFseXNlcyJdLCJzZXR0aW5ncyI6eyJzaG93UHJvbXB0cyI6dHJ1ZSwicHJvbXB0c1ZpZXdlZCI6W10sInNldHRpbmdzIjp7InNob3dQcm9tcHRzIjp0cnVlLCJwcm9tcHRzVmlld2VkIjpbInNoYXJlV2lkZ2V0IiwiZG93bmxvYWREYXNoYm9hcmRTdGF0cyJdLCJzZXR0aW5ncyI6eyJzaG93UHJvbXB0cyI6dHJ1ZSwicHJvbXB0c1ZpZXdlZCI6WyJzaGFyZVdpZGdldCJdLCJzZXR0aW5ncyI6eyJzaG93UHJvbXB0cyI6dHJ1ZSwicHJvbXB0c1ZpZXdlZCI6W10sInNldHRpbmdzIjp7Im9wZW4iOmZhbHNlLCJzdGVwSW5kZXgiOjAsInN0ZXBzS2V5IjoiIn0sIm9wZW4iOnRydWUsInN0ZXBJbmRleCI6MCwic3RlcHNLZXkiOiJzaGFyZVdpZGdldCJ9LCJvcGVuIjp0cnVlLCJzdGVwSW5kZXgiOjAsInN0ZXBzS2V5IjoiZG93bmxvYWREYXNoYm9hcmRTdGF0cyJ9LCJvcGVuIjp0cnVlLCJzdGVwc0tleSI6IndpZGdldFNldHRpbmdzIn0sIm9wZW4iOnRydWUsInN0ZXBJbmRleCI6MCwic3RlcHNLZXkiOiJkYXNoYm9hcmRBbmFseXNlcyJ9LCJzdGVwc0tleSI6ImRhc2hib2FyZEFuYWx5c2VzIiwic3RlcEluZGV4IjotMSwiZm9yY2UiOnRydWV9LCJvcGVuIjp0cnVlLCJzdGVwc0tleSI6ImRvd25sb2FkRGFzaGJvYXJkU3RhdHMifQ%3D%3D&location=WyJnbG9iYWwiXQ%3D%3D&map=eyJkYXRhc2V0cyI6W3sib3BhY2l0eSI6MC43LCJ2aXNpYmlsaXR5Ijp0cnVlLCJkYXRhc2V0IjoicHJpbWFyeS1mb3Jlc3RzIiwibGF5ZXJzIjpbInByaW1hcnktZm9yZXN0cy0yMDAxIl19LHsiZGF0YXNldCI6InBvbGl0aWNhbC1ib3VuZGFyaWVzIiwibGF5ZXJzIjpbImRpc3B1dGVkLXBvbGl0aWNhbC1ib3VuZGFyaWVzIiwicG9saXRpY2FsLWJvdW5kYXJpZXMiXSwiYm91bmRhcnkiOnRydWUsIm9wYWNpdHkiOjEsInZpc2liaWxpdHkiOnRydWV9LHsiZGF0YXNldCI6InRyZWUtY292ZXItbG9zcyIsImxheWVycyI6WyJ0cmVlLWNvdmVyLWxvc3MiXSwib3BhY2l0eSI6MSwidmlzaWJpbGl0eSI6dHJ1ZSwicGFyYW1zIjp7InRocmVzaCI6MzAsInZpc2liaWxpdHkiOnRydWV9fV19&treeLossPct=eyJoaWdobGlnaHRlZCI6ZmFsc2V9" title=""><i class="fa fa-angle-double-right"></i> Données Global Forest Watch </a></li>
+						</ul>
+						<p>Solomon Maria <br> maria.solomon@etu.univ-lyon1.fr <br> Treger Pauline <br> pauline.treger@etu.univ-lyon1.fr</p>
+					</div>
+				</div>
+	
+				<div class="col-md-3 col-sm-6">
+					<div class="footer-info-single">
+						<h2 class="title"> Gestion des Graphes </h2>
+						<ul class="list-unstyled">
+							<li><a href="https://d3js.org/" title=""><i class="fa fa-angle-double-right"></i> d3.js </a></li>
+							<li><a href="https://observablehq.com/@d3/donut-chart" title=""><i class="fa fa-angle-double-right"></i> Donut Chart </a></li>
+							<li><a href="https://www.datavis.fr/index.php?page=stacked-barchart" title=""><i class="fa fa-angle-double-right"></i> Stacked Bar Chart </a></li>
+							<li><a href="https://observablehq.com/@d3/bar-chart-race-explained" title=""><i class="fa fa-angle-double-right"></i> Bar Chart Race </a></li>
+							<li><a href="https://observablehq.com/@d3/radial-stacked-bar-chart" title=""><i class="fa fa-angle-double-right"></i> Radial Stacked Bar Chart </a></li>
+							<li><a href="https://www.d3-graph-gallery.com/graph/connectedscatter_legend.html" title=""><i class="fa fa-angle-double-right"></i> Connected Scatter </a></li>
+
+						</ul>
+					</div>
+				</div>
+	
+				<div class="col-md-3 col-sm-6">
+					<div class="footer-info-single">
+						<h2 class="title"> Gestion du Site </h2>
+						<ul class="list-unstyled">
+							<li><a href="https://getbootstrap.com/" title=""><i class="fa fa-angle-double-right"></i> BootStrap v4</a></li>
+							<li><a href="http://fontawesome.io/" title=""><i class="fa fa-angle-double-right"></i> FontAwesome </a></li>
+							<li><a href="https://lyondataviz.github.io/teaching/lyon1-m2/2020/" title=""><i class="fa fa-angle-double-right"></i> Nos Cours </a></li>
+						</ul>
+					</div>
+				</div>
+	
+				<div class="col-md-3 col-sm-6">
+					<div class="footer-info-single">
+						<h2 class="title">A propos de nous</h2>
+						<p> 4 étudiants - 2e année de Master Intelligence Artificielle - Université Lyon 1 </p>
+						<p> Chupin Pierre-Henri <br> pierre-henri.chupin@etu.univ-lyon1.fr <br> Jassigneux Marie <br> marie.jassigneux@etu.univ-lyon1.fr</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<section class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="text-center">
+						<p>Copyright © 2021 - Dataviz - Déforestation</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</footer>
+</html>

@@ -1,0 +1,11 @@
+text.titreDefo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.cssDefo {
+    font-family: Open Sans, sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    opacity: 0.1;
+}
